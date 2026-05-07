@@ -1,15 +1,31 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit">
-                Logout
-            </button>
-        </form>
+        <form method="POST" action="">
+        @csrf
+
+
+
+        <div>
+            <label for="title">タイトル</label>
+            <input id="title" type="text" name="title" value="{{ old('title') }}">
+
+            @error('title')
+                <p>{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="body">内容</label>
+            <textarea id="body" name="body">{{ old('body') }}</textarea>
+
+            @error('body')
+                <p>{{ $message }}</p>
+            @enderror
+        </div>
+
+        <button type="submit">登録</button>
+    </form>
 
     </x-slot>
 
