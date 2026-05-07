@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Todo;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Auth\User;
 
 class TodoSeeder extends Seeder
 {
@@ -23,6 +22,12 @@ class TodoSeeder extends Seeder
             'body' => '一覧表示確認用のTodoです。',
             'is_done' => false,
         ]);
-    }
 
+        Todo::create([
+            'user_id' => $user->id,
+            'title' => 'これはテストです。',
+            'body' => 'sample。',
+            'is_done' => false,
+        ]);
+    }
 }
