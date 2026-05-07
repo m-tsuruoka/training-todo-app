@@ -7,15 +7,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', [AuthController::class, 'showLogin']);
-Route::post('/login', [AuthController::class, 'login']);
 Route::get('/dashboard', function () {
-    if (!session('user_id')) {
-        return redirect('/login');
-    }
-
-    return 'ログイン成功！';
-});
+return 'ログイン成功！';
+})->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
