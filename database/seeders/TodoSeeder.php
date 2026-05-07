@@ -20,8 +20,7 @@ class TodoSeeder extends Seeder
         Todo::create([
             'user_id' => $user->id,
             'title' => 'サンプルTodo',
-            'description' => '一覧表示確認用のTodoです。',
-            'due_date' => now()->addWeek()->toDateString(),
+            'body' => '一覧表示確認用のTodoです。',
             'is_done' => false,
         ]);
     }
