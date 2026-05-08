@@ -81,14 +81,15 @@
                         <div class="text-sm text-gray-500">
                             {{ $todo->body }}
                         </div>
-                        <div class="edit">
+                        <div class="flex justify-end">
                             <a href="{{ route('todos.edit', $todo) }}">編集</a>
                         </div>
                         <div class="flex justify-end">
-                            <button
-                                class="bg-red-500 text-white px-4 py-2 rounded">
-                                削除
-                            </button>
+                            <form action="{{ route('todos.destroy', $todo) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
+                </form>
                         </div>
 
                     </div>
