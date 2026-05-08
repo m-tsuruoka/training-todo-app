@@ -22,6 +22,7 @@ Route::post('/todos', [TodoController::class, 'store'])
 
 Route::get('/todos/{todo}/edit', [TodoController::class, 'edit'])->name('todos.edit');
 Route::put('/todos/{todo}', [TodoController::class, 'update'])->name('todos.update');
+Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])->name('todos.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

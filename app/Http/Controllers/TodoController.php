@@ -48,4 +48,10 @@ class TodoController extends Controller
 
     return redirect()->route('dashboard');
 }
+public function destroy(Todo $todo)
+    {
+        $todo->delete();
+
+        return redirect()->route('dashboard');
+    }
 }
