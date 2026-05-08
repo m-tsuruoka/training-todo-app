@@ -8,8 +8,9 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todos = Todo::where('user_id', auth()->id())->get();
-        $todos = Todo::latest()->get();
+       $todos = Todo::where('user_id', auth()->id())
+                 ->latest()
+                 ->get();
 
         return view('dashboard', compact('todos'));
     }
