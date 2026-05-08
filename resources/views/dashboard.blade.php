@@ -1,73 +1,68 @@
 <x-app-layout>
     <x-slot name="header">
 
-    @csrf
-
-   <div class="bg-white p-6 rounded shadow mb-6">
-
-    <form method="POST" action="{{ route('todos.store') }}" class="space-y-4">
         @csrf
 
-        {{-- タイトル --}}
-        <div>
-            <label
-                for="title"
-                class="block text-sm font-medium text-gray-700"
-            >
-                タイトル
-            </label>
+        <div class="bg-white p-6 rounded shadow mb-6">
 
-            <input
-                id="title"
-                type="text"
-                name="title"
-                value="{{ old('title') }}"
-                class="mt-1 block w-full rounded border-gray-300 shadow-sm"
-            >
+            <form method="POST" action="{{ route('todos.store') }}" class="space-y-4">
+                @csrf
 
-            @error('title')
-                <p class="text-red-500 text-sm mt-1">
-                    {{ $message }}
-                </p>
-            @enderror
+                {{-- タイトル --}}
+                <div>
+                    <label
+                        for="title"
+                        class="block text-sm font-medium text-gray-700">
+                        タイトル
+                    </label>
+
+                    <input
+                        id="title"
+                        type="text"
+                        name="title"
+                        value="{{ old('title') }}"
+                        class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+
+                    @error('title')
+                    <p class="text-red-500 text-sm mt-1">
+                        {{ $message }}
+                    </p>
+                    @enderror
+                </div>
+
+                {{-- 内容 --}}
+                <div>
+                    <label
+                        for="body"
+                        class="block text-sm font-medium text-gray-700">
+                        内容
+                    </label>
+
+                    <input
+                        id="body"
+                        name="body"
+                        rows="4"
+                        class="mt-1 block w-full rounded border-gray-300 shadow-sm">{{ old('body') }}</input>
+
+                    @error('body')
+                    <p class="text-red-500 text-sm mt-1">
+                        {{ $message }}
+                    </p>
+                    @enderror
+                </div>
+
+                {{-- ボタン --}}
+                <div class="flex justify-end">
+                    <button
+                        type="submit"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                        登録
+                    </button>
+                </div>
+
+            </form>
+
         </div>
-
-        {{-- 内容 --}}
-        <div>
-            <label
-                for="body"
-                class="block text-sm font-medium text-gray-700"
-            >
-                内容
-            </label>
-
-            <input
-                id="body"
-                name="body"
-                rows="4"
-                class="mt-1 block w-full rounded border-gray-300 shadow-sm"
-            >{{ old('body') }}</input>
-
-            @error('body')
-                <p class="text-red-500 text-sm mt-1">
-                    {{ $message }}
-                </p>
-            @enderror
-        </div>
-
-        {{-- ボタン --}}
-        <div class="flex justify-end">
-            <button
-                type="submit"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            >
-                登録
-            </button>
-        </div>
-
-    </form>
-
-</div>
     </x-slot>
 
     <div class="py-12">
@@ -78,26 +73,28 @@
 
                     {{-- ここにTodo一覧 --}}
                     @forelse ($todos as $todo)
-                        <div class="border-b py-2">
-                            <div class="font-bold">
-                                {{ $todo->title }}
-                            </div>
-
-                            <div class="text-sm text-gray-500">
-                                {{ $todo->body }}
-                            </div>
-                               <div class="flex justify-end">
-    <button
-        class="bg-red-500 text-white px-4 py-2 rounded"
-    >
-        削除
-    </button>
-</div>
-                            
+                    <div class="border-b py-2">
+                        <div class="font-bold">
+                            {{ $todo->title }}
                         </div>
-                        
+
+                        <div class="text-sm text-gray-500">
+                            {{ $todo->body }}
+                        </div>
+                        <div class="edit">
+                            <a href="{{ route('todos.edit', $todo) }}">編集</a>
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                class="bg-red-500 text-white px-4 py-2 rounded">
+                                削除
+                            </button>
+                        </div>
+
+                    </div>
+
                     @empty
-                        <div>Todoがありません</div>
+                    <div>Todoがありません</div>
                     @endforelse
 
                 </div>
