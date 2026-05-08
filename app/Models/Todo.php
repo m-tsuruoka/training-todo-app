@@ -9,8 +9,8 @@ class Todo extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'description',
-        'due_date',
+        'body',
+        'created_at',
         'is_done',
     ];
 }

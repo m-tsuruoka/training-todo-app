@@ -12,4 +12,21 @@ class TodoController extends Controller
 
         return view('dashboard', compact('todos'));
     }
+
+    public function store(Request $request)
+{
+    $validated = $request->validate([
+        'title' => ['required', 'max:255'],
+        'body' => ['nullable'],
+    ]);
+
+    Todo::create([
+        'title' => $validated['title'],
+        'body' => $validated['body'],
+        'is_done' => false,
+        'user_id' => auth()->id(),
+    ]);
+
+    return redirect()->route('dashboard');
+}
 }
